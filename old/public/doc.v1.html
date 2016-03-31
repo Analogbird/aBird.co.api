@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>aBird.co API documentation : We fly light!</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Birds are build for speed, so are we. The world's most awesome URL shortening service API documentation.">
+    <meta name="author" content="Analogbird B.V.">
+    <meta name="url" content="http://docs.abird.co">
+    <meta name="identifier-URL" content="http://docs.abird.co">
+    <meta name="robots" content="index,follow">
+    <meta name="coverage" content="Worldwide">
+    <meta name="distribution" content="Global">
+    <meta name="og:url" content="http://docs.abird.co">
+    <meta name="og:title" content="aBird.co API documentation : We fly light!">
+    <meta name="og:image" content="http://abird.co/img/abird.co.png">
+    <meta name="og:description" content="Birds are build for speed, so are we. The world's most awesome URL shortening service API documentation.">
+    <meta name="og:locale" content="en_US">
+    <link rel="shortcut icon" href="http://abird.co/img/logo.png" type="image/png">
+
+    <link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
+    <script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body><div class="container"><pre class="prettyprint prettyprinted"><code><span class="typ">Version</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0.8</span><span class="pun">.</span><span class="lit">24</span></code></pre>
+
+
+    <div align="center" style="margin:30px 0 40px">
+        <img src="http://www.analogbird.com/static/img/playground/abird.co.png">
+    </div><div class="se-section-delimiter"></div>
+
+    <h1 id="abirdco">aBird.co</h1>
+
+    <p>A basic wrapper written in <code>Nodejs</code> is available on <a href="http://aichholzer.github.io/aBird.co/">GitHub</a>. It’s also available via the <a href="https://www.npmjs.org/package/abird.co">NPM</a> repository.</p><div class="se-section-delimiter"></div>
+
+    <h2 id="end-points-environments"><i class="icon-shuffle"></i> End points (Environments)</h2>
+
+<pre class="prettyprint prettyprinted"><code><span class="typ">DEVelopment</span><span class="pln">
+http</span><span class="pun">(</span><span class="pln">s</span><span class="pun">):</span><span class="com">//sandbox.abird.co</span></code></pre>
+
+    <p><strong>Note:</strong> All development data is deleted daily, at midnight (CET). </p>
+
+<pre class="prettyprint prettyprinted"><code><span class="typ">PROduction</span><span class="pln">
+http</span><span class="pun">(</span><span class="pln">s</span><span class="pun">):</span><span class="com">//api.abird.co</span></code></pre>
+
+    <p><code>HTTPS</code> should be used where indicated.</p>
+
+    <h2 id="responses"><i class="icon-retweet"></i> Responses</h2>
+
+    <p>Possibly returned HTTP status codes are:</p>
+
+    <ul>
+        <li><p>200 <br>
+            <code>All OK. No problems. Response body is returned if one is expected.</code></p></li>
+        <li><p>403 <br>
+            <code>Request received as expected but the API key is not valid.</code> <br>
+            <code>Request received as expected but the request limit has been reached.</code></p></li>
+        <li><p>404 <br>
+            <code>No data could be found to match your request.</code> <br>
+            <code>The URL you are trying to shrink does not seem to be valid.</code></p></li>
+        <li><p>406 <br>
+            <code>The provided content is not acceptable.</code></p></li>
+        <li><p>409 <br>
+            <code>The provided mask is already in use.</code></p></li>
+    </ul>
+
+    <h2 id="api-key"><i class="icon-key"></i> API key</h2>
+
+    <p>Before using this API you should obtain a valid <code>API key</code>. Once you create an account you will automatically be assigned a key.</p>
+
+    <p><code>Shrinking</code> requests are currently throttled to a maximum of 500 requests per day.</p>
+
+    <p>The exact numbers, of available and already made requests, can be obtain from the <code>X-Requests-left</code> and <code>X-Requests-made</code> HTTP headers respectively.</p>
+
+    <h2 id="mobile-api-key"><i class="icon-mobile"></i> Mobile API key</h2>
+
+    <p>If you are planning to use the <code>aBird.co API</code> for a mobile application, you will need to use a different type of <code>key</code>, one which is generated for each user on your behalf.</p>
+
+    <p>Each client has to make an API request, providing your <code>key</code>, in order to obtain a valid <code>key</code> for that particular client. This request only needs to be made once.</p>
+
+<pre class="prettyprint prettyprinted"><code><span class="pln">HTTP</span><span class="pun">/</span><span class="lit">1.1</span><span class="pln">
+POST </span><span class="pun">/</span><span class="pln">mobile</span><span class="pun">/</span><span class="pln">
+</span><span class="typ">Body</span><span class="pln"> </span><span class="pun">(</span><span class="pln">JSON payload</span><span class="pun">)</span><span class="pln">
+
+</span><span class="typ">Content</span><span class="pun">-</span><span class="typ">Type</span><span class="pun">:</span><span class="pln"> application</span><span class="pun">/</span><span class="pln">json</span></code></pre>
+
+    <p>Body:</p>
+
+<pre class="prettyprint prettyprinted"><code><span class="pun">{</span><span class="pln">
+ </span><span class="str">"key"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">string</span><span class="pln"> </span><span class="pun">(</span><span class="typ">Your</span><span class="pln"> API key</span><span class="pun">),</span><span class="pln">
+ </span><span class="str">"device"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="str">"udid"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">string</span><span class="pln"> </span><span class="pun">(</span><span class="typ">The</span><span class="pln"> device UDID</span><span class="pun">),</span><span class="pln">
+            </span><span class="str">"vendor"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">string</span><span class="pln"> </span><span class="pun">(</span><span class="typ">Apple</span><span class="pun">,</span><span class="pln"> LG</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Samsung</span><span class="pun">,</span><span class="pln"> HTC</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Sony</span><span class="pun">,</span><span class="pln"> etc</span><span class="pun">.),</span><span class="pln">
+            </span><span class="str">"model"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">string</span><span class="pln"> </span><span class="pun">(</span><span class="pln">iPhone </span><span class="lit">4</span><span class="pun">,</span><span class="pln"> iPhone </span><span class="lit">5S</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Nexus</span><span class="pln"> </span><span class="lit">5</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Galaxy</span><span class="pln"> S4</span><span class="pun">,</span><span class="pln"> etc</span><span class="pun">.)</span><span class="pln">
+           </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+
+    <p>Response:</p>
+
+<pre class="prettyprint prettyprinted"><code><span class="lit">200</span><span class="pln">
+
+</span><span class="pun">{</span><span class="pln">
+ </span><span class="str">"key"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">string</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+
+</span><span class="pun">|</span><span class="pln"> </span><span class="lit">403</span><span class="pln"> </span><span class="pun">|</span><span class="pln"> </span><span class="lit">406</span><span class="pln"> </span></code></pre>
+
+    <p>The client will now have a unique <code>key</code> based on yours. Only this key must be used from now on. The same throttle limits as for the <a href="#api-key">API key</a> apply.</p>
+
+    <p><strong>Note:</strong> If you disable a <code>key</code> which was used to generate any client <code>keys</code>, then all clients using a subset of that <code>key</code> will be invalidated.</p>
+
+    <h1 id="working-with-urls">Working with URLs</h1>
+
+    <h2 id="shrink-a-url"><i class="icon-download"></i> Shrink a URL</h2>
+
+<pre class="prettyprint prettyprinted"><code><span class="pln">HTTP</span><span class="pun">/</span><span class="lit">1.1</span><span class="pln">
+POST </span><span class="pun">/</span><span class="pln">url</span><span class="pun">/</span><span class="pln">
+</span><span class="typ">Body</span><span class="pln"> </span><span class="pun">(</span><span class="pln">JSON payload</span><span class="pun">)</span><span class="pln">
+
+</span><span class="typ">Content</span><span class="pun">-</span><span class="typ">Type</span><span class="pun">:</span><span class="pln"> application</span><span class="pun">/</span><span class="pln">json</span></code></pre>
+
+    <p>Body:</p>
+
+<pre class="prettyprint prettyprinted"><code><span class="pun">{</span><span class="pln">
+ </span><span class="str">"key"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">string</span><span class="pln"> </span><span class="pun">(</span><span class="typ">Your</span><span class="pln"> API key</span><span class="pun">),</span><span class="pln">
+ </span><span class="str">"url"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">string</span><span class="pun">,</span><span class="pln">
+ </span><span class="str">"mask"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">string</span><span class="pun">,</span><span class="pln">
+ </span><span class="str">"stats"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">boolean</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+
+    <p>Use the <code>mask</code> property if you want to specify a custom keyword which will be used to identify your URL. Letters, digits and underscores are allowed.</p>
+
+    <p>The <code>stats</code> property defines whether the URL’s statistics can be publicly accessed or not. The default value is <code>true</code>.</p>
+
+    <p>Response:</p>
+
+<pre class="prettyprint prettyprinted"><code><span class="lit">200</span><span class="pln">
+
+</span><span class="pun">{</span><span class="pln">
+ </span><span class="str">"url"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">string</span><span class="pun">,</span><span class="pln">
+ </span><span class="str">"shrank"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="str">"chars"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">int</span><span class="pun">,</span><span class="pln">
+            </span><span class="str">"percent"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">int</span><span class="pln">
+           </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+
+</span><span class="pun">|</span><span class="pln"> </span><span class="lit">403</span><span class="pln"> </span><span class="pun">|</span><span class="pln"> </span><span class="lit">404</span><span class="pln"> </span><span class="pun">|</span><span class="pln"> </span><span class="lit">406</span><span class="pln"> </span><span class="pun">|</span><span class="pln"> </span><span class="lit">409</span></code></pre>
+
+    <h2 id="delete-a-url"><i class="icon-trash"></i> Delete a URL</h2>
+
+<pre class="prettyprint prettyprinted"><code><span class="pln">HTTP</span><span class="pun">/</span><span class="lit">1.1</span><span class="pln">
+DELETE </span><span class="pun">/</span><span class="pln">url</span><span class="pun">/</span><span class="pln">
+</span><span class="typ">Body</span><span class="pln"> </span><span class="pun">(</span><span class="pln">JSON payload</span><span class="pun">)</span><span class="pln">
+
+</span><span class="typ">Content</span><span class="pun">-</span><span class="typ">Type</span><span class="pun">:</span><span class="pln"> application</span><span class="pun">/</span><span class="pln">json</span></code></pre>
+
+    <p>Body:</p>
+
+<pre class="prettyprint prettyprinted"><code><span class="pun">{</span><span class="pln">
+ </span><span class="str">"key"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">string</span><span class="pln"> </span><span class="pun">(</span><span class="typ">Your</span><span class="pln"> API key</span><span class="pun">),</span><span class="pln">
+ </span><span class="str">"url"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">string</span><span class="pun">,</span><span class="pln">
+ </span><span class="str">"type"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">string</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+
+    <p>The optional <code>type</code> property can be any of the following:</p>
+
+    <ul>
+        <li><code>soft</code> - Your URL will be marked as deleted but kept in store. Use this option if you intend to reactivate deleted URLs in the future.</li>
+        <li><code>hard</code> - Your URL will be completely deleted. This action can’t be undone.</li>
+    </ul>
+
+    <p>The default option is <code>soft</code>.</p>
+
+    <p>Response:</p>
+
+    <pre class="prettyprint prettyprinted"><code><span class="lit">200</span><span class="pln"> </span><span class="pun">|</span><span class="pln"> </span><span class="lit">403</span><span class="pln"> </span><span class="pun">|</span><span class="pln"> </span><span class="lit">406</span></code></pre>
+
+    <h2 id="expand-a-url"><i class="icon-upload"></i> Expand a URL</h2>
+
+<pre class="prettyprint prettyprinted"><code><span class="pln">HTTP</span><span class="pun">/</span><span class="lit">1.1</span><span class="pln">
+GET </span><span class="pun">/</span><span class="pln">url</span><span class="pun">/?</span><span class="pln">url</span><span class="pun">=&lt;</span><span class="pln">url</span><span class="pun">&gt;</span></code></pre>
+
+    <p>Response:</p>
+
+<pre class="prettyprint prettyprinted"><code><span class="lit">200</span><span class="pln">
+
+</span><span class="pun">{</span><span class="pln">
+ </span><span class="str">"url"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">string</span><span class="pun">,</span><span class="pln">
+ </span><span class="str">"expanded"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+              </span><span class="str">"chars"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">int</span><span class="pun">,</span><span class="pln">
+              </span><span class="str">"percent"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">int</span><span class="pln">
+             </span><span class="pun">},</span><span class="pln">
+ </span><span class="str">"stats"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+           </span><span class="str">"shrunken"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">int</span><span class="pun">,</span><span class="pln">
+           </span><span class="str">"expanded"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">int</span><span class="pln">
+          </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+
+</span><span class="pun">|</span><span class="pln"> </span><span class="lit">404</span><span class="pln"> </span></code></pre>
+
+    <p>The <code>stats</code> (basic URL statistics) property will only be availble for URLs which have public statistics enabled. See how to <a href="#shrink-a-url">Shrink a URL</a>.</p>
+
+    <p>If you only want to obtain a URL’s statistics, you may use this API call:</p>
+
+<pre class="prettyprint prettyprinted"><code><span class="pln">HTTP</span><span class="pun">/</span><span class="lit">1.1</span><span class="pln">
+GET </span><span class="pun">/</span><span class="pln">url</span><span class="pun">/</span><span class="pln">stats</span><span class="pun">/?</span><span class="pln">url</span><span class="pun">=&lt;</span><span class="pln">url</span><span class="pun">&gt;</span></code></pre>
+
+    <p>Response:</p>
+
+<pre class="prettyprint prettyprinted"><code><span class="lit">200</span><span class="pln">
+
+</span><span class="pun">{</span><span class="pln">
+ </span><span class="str">"shrunken"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">int</span><span class="pun">,</span><span class="pln">
+ </span><span class="str">"expanded"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">int</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+
+</span><span class="pun">|</span><span class="pln"> </span><span class="lit">404</span><span class="pln"> </span></code></pre></div></body>
+</html>

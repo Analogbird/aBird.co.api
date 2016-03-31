@@ -1,0 +1,30 @@
+/*var screenShot = function(url, hash) {
+
+	var deferred = when.defer();
+
+	phantom.create(function (ph) {
+		ph.createPage(function (page) {
+
+			page.set('viewportSize', {
+				width: 1024,
+				height: 640
+			});
+			page.set('clipRect', {
+				top: 0,
+				left: 0,
+				width: 1024,
+				height: 624
+			});
+
+			page.open(url, function (status) {
+				page.render(hash + '.png', function (result) {
+					ph.exit();
+					deferred.resolve(hash + '.png');				
+				});
+			});
+		});
+	});
+
+	return deferred.promise;
+
+};*/
