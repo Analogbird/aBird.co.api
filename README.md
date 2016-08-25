@@ -16,7 +16,7 @@ Try it, love it, use it: [http://abird.co](http://abird.co)
 
 MIT License
 
-Copyright (c) 2016 Analogbird
+Copyright (c) 2016 Stefan Aichholzer aka. Analogbird
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
