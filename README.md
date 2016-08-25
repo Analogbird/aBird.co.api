@@ -11,7 +11,6 @@ The world's best, coolest and fastest URL shortening service. Period.
 
 Try it, love it, use it: [http://abird.co](http://abird.co)
 
-[link](http://)
 
 ### License
 
