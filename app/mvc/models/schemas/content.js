@@ -3,14 +3,14 @@
 
 module.exports = mongoose => {
 
-	let Schema = mongoose.Schema,
-		schema = new Schema(
-			{
-				userId: {
-					type: Schema.Types.ObjectId,
-					ref: 'User'
-				},
-				type: {
+    let Schema = mongoose.Schema,
+        schema = new Schema(
+            {
+                userId: {
+                    type: Schema.Types.ObjectId,
+                    ref: 'User'
+                },
+                type: {
                     type: String,
                     default: 'uri',
                     required: true
@@ -52,22 +52,22 @@ module.exports = mongoose => {
                         trim: true
                     }
                 },
-				meta: {
+                meta: {
                     status: {
                         type: String,
                         default: 'up'
                     },
-					createdOn: {
-						type: Date,
-						default: Date.now
-					}
-				}
-			},
-			{
-				strict: true,
-				versionKey: false
-			}
-		);
+                    createdOn: {
+                        type: Date,
+                        default: Date.now
+                    }
+                }
+            },
+            {
+                strict: true,
+                versionKey: false
+            }
+        );
 
-	return mongoose.model('Content', schema, 'contents');
+    return mongoose.model('Content', schema, 'contents');
 };

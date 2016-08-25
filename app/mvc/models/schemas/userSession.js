@@ -3,8 +3,8 @@
 
 module.exports = mongoose => {
 
-	let Schema = mongoose.Schema,
-		schema = new Schema(
+    let Schema = mongoose.Schema,
+        schema = new Schema(
             {
                 userId: {
                     type: Schema.Types.ObjectId,
@@ -31,7 +31,7 @@ module.exports = mongoose => {
                 strict: true,
                 versionKey: false
             }
-		);
+        );
 
-	return mongoose.model('UserSession', schema, 'userSessions');
+    return mongoose.model('UserSession', schema, 'userSessions');
 };

@@ -4,6 +4,19 @@
 let config = require('../../../config'),
     m = require('../../models'),
     validator = require('validator'),
+    response = (record, input, unescapedUrl) => {
+
+        let url = config.host.concat(record.mask);
+        return {
+            mask: record.mask,
+            url: url,
+            tally: record.tally,
+            shrank: {
+                chars: (unescapedUrl || input).length - url.length,
+                percent: (100 - ((url.length * 100 ) / (unescapedUrl || input).length)).toFixed(2)
+            }
+        };
+    },
     process = (data, unescapedUrl) => {
 
         return new Promise((yes, no) => {
@@ -18,20 +31,7 @@ let config = require('../../../config'),
                 .then(record => yes(response(record, data.value, unescapedUrl)))
                 .catch(error => no(error));
         });
-    },
-    response = (record, input, unescapedUrl) => {
-
-        let url = config.host.concat(record.mask);
-        return {
-            mask: record.mask,
-            url: url,
-            shrank: {
-                chars: (unescapedUrl || input).length - url.length,
-                percent: (100 - ((url.length * 100 ) / (unescapedUrl || input).length)).toFixed(2)
-            }
-        }
     };
-
 
 module.exports = {
 
@@ -60,7 +60,7 @@ module.exports = {
 
             data.value = req.body.value.replace(/\/$/, '').trim();
             if (data.value.indexOf('http') !== 0) {
-                data.value = 'http://'.concat(value);
+                data.value = 'http://'.concat(data.value);
             }
 
             if (!validator.isURL(data.value)) {
