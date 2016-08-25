@@ -1,6 +1,6 @@
-<p align="center">
-	<img src="http://www.analogbird.com/static/img/playground/abird.co.png" width="120">
-</p>
+<div align="center" style="margin:30px 0 40px">
+	<img src="http://www.analogbird.com/static/img/playground/abird.co.png"/>
+</div>
 
 
 ### aBird.co
