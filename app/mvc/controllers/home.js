@@ -3,7 +3,7 @@
 
 module.exports = {
 
-    index : function site$index (req, res) {
+    index: (req, res) => {
 
         res.status(200).send({
             code: 200,
@@ -11,11 +11,10 @@ module.exports = {
         });
     },
 
-    time : function site$time (req, res) {
+    time: (req, res) => {
 
         res.status(200).send({
             time: Math.round(+new Date() / 1000)
         });
     }
-
 };

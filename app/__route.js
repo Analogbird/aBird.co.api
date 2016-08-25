@@ -1,10 +1,10 @@
 'use strict';
 
 
-var account = require('./controllers/account'),
-    content = require('./controllers/content'),
-    site = require('./controllers/site'),
-    validate = require('./library/validate'),
+var account = require('./mvc/controllers/account'),
+    content = require('./mvc/controllers/content'),
+    site = require('./mvc/controllers/site'),
+    validate = require('./library/validators/validate'),
     error = require('./library/error');
 
 module.exports = function (app) {

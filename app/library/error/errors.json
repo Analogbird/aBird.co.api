@@ -1,0 +1,24 @@
+{
+    "400": {
+        "10": "The content type does not match our expectations.",
+        "11": "The provided data could not be successfully validated.",
+        "12": "The request has exceeded the time offset.",
+        "13": "The email address is already in use.",
+        "14": "The email address is not valid.",
+        "15": "The password does not match our criteria."
+    },
+    "401": {
+        "10": "The provided email address is not valid.",
+        "11": "The provided username is not valid.",
+        "12": "The email address does not match any profile."
+    },
+    "403": {
+        "10": "The provided authorization is not valid."
+    },
+    "404": {
+        "10": "The requested resource could not be found."
+    },
+    "500": {
+        "10": "An unexpected error has occurred, we are on it!"
+    }
+}

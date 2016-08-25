@@ -2,31 +2,23 @@
     "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "required": [
-        "data"
+        "type",
+        "value"
     ],
     "properties": {
+        "type": {
+            "type": "string"
+        },
+        "value": {
+            "type": "string"
+        },
+        "mask": {
+            "type": "string"
+        },
         "public": {
             "type": "boolean"
         },
-        "data": {
-            "type": "object",
-            "required": [
-                "mime",
-                "value"
-            ],
-            "properties": {
-                "mime": {
-                    "type": "string"
-                },
-                "value": {
-                    "type": "string"
-                },
-                "mask": {
-                    "type": "string"
-                }
-            }
-        },
-        "meta": {
+        "source": {
             "type": "object",
             "properties": {
                 "url": {
