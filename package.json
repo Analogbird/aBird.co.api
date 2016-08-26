@@ -1,7 +1,7 @@
 {
     "name": "aBird.co",
     "version": "2.5.0",
-    "description": "aBird.co API",
+    "description": "The aBird.co API.",
     "keywords": [],
     "author": {
         "name": "Stefan Aichholzer",
