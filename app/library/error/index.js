@@ -1,7 +1,7 @@
 'use strict';
 
 
-let errors = require('./errors.json');
+const errors = require('./errors.json');
 
 module.exports = (error, req, res, next) => {
 
